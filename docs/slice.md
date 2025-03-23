@@ -88,3 +88,17 @@ object_prediction_list[keep_ind] = merge_object_prediction_pair(
                         object_prediction_list[keep_ind].tolist(), object_prediction_list[merge_ind].tolist()
                     )
 ```
+
+元件的融合`utils.py`的`def merge_object_prediction_pair()`实现, 代码如下:
+```python
+#其他信息的融合
+merged_bbox: BoundingBox = get_merged_bbox(pred1, pred2)
+merged_score: float = get_merged_score(pred1, pred2)
+merged_category: Category = get_merged_category(pred1, pred2)
+
+# mask的融合
+if pred1.mask and pred2.mask:
+    merged_mask: Mask = get_merged_mask(pred1, pred2)
+```
+
+`get_merged_mask()`实现了mask的融合

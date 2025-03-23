@@ -40,15 +40,18 @@ make -j
 ### 4. 其他资源
 [接口文档](docs/api.md)
 
+[大图切分说明文档](docs/slice.md)
+
 [模型权重文件](models/)
 models/synpcbseg.pt,models/synpcbseg.onnx
 
 [示例用pcb图片](input/demopcb.png)
 input/demopcb.png
 
-
 [使用demo](source/main.cpp)
 请参考source/main.cpp的main()
+
+[纯python demo mytest/mainapi.py](mytest/mainapi.py)
 
 
 

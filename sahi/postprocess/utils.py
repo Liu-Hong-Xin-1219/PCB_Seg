@@ -210,8 +210,8 @@ def merge_object_prediction_pair(
     merged_bbox: BoundingBox = get_merged_bbox(pred1, pred2)
     merged_score: float = get_merged_score(pred1, pred2)
     merged_category: Category = get_merged_category(pred1, pred2)
-    if pred1.bbox.minx==390:
-        print("same box here lets chekc out")
+    # if pred1.bbox.minx==390:
+    #     print("same box here lets chekc out")
     if pred1.mask and pred2.mask:
         merged_mask: Mask = get_merged_mask(pred1, pred2)
         segmentation = merged_mask.segmentation

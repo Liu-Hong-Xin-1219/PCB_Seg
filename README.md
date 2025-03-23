@@ -52,6 +52,8 @@ input/demopcb.png
 请参考source/main.cpp的main()
 
 [纯python demo mytest/mainapi.py](mytest/mainapi.py)
+在项目根目录运行pip install -e .
+然后使用下面代码，即可调用python的api infer()
 
 
 

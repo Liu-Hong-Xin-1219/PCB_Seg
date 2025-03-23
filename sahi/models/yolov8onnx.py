@@ -369,9 +369,24 @@ class Yolov8OnnxDetectionModel(DetectionModel):
         if len(masks.shape) < 2:
             raise ValueError(f'"len of masks shape" should be 2 or 3, but got {len(masks.shape)}')
         masks = masks[top:bottom, left:right]
-        masks = cv2.resize(
-            masks, (im0_shape[1], im0_shape[0]), interpolation=cv2.INTER_LINEAR
-        )  # INTER_CUBIC would be better
+        
+        # masks = cv2.resize(
+        #     masks, (im0_shape[1], im0_shape[0]), interpolation=cv2.INTER_LINEAR
+        # )  # INTER_CUBIC would be better
+
+        # if too many channel in masks (too many objects), the resize() cannot take it, must do in loop
+        if masks.shape[2] > 100:  # 如果通道数过多
+            j=masks.shape[2]-masks.shape[2]%100
+            resized_masks = np.concatenate([
+                cv2.resize(masks[:, :, (i-100):i].astype(np.float32), (im0_shape[1], im0_shape[0]), interpolation=cv2.INTER_LINEAR)
+                for i in range(100,masks.shape[2],100)
+            ], axis=2)
+            resized_masks=np.concatenate([
+                resized_masks,cv2.resize(masks[:, :, j:masks.shape[2]].astype(np.float32), (im0_shape[1], im0_shape[0]), interpolation=cv2.INTER_LINEAR)
+            ], axis=2)
+        else:
+            resized_masks = cv2.resize(masks, (im0_shape[1], im0_shape[0]), interpolation=cv2.INTER_LINEAR)
+        masks=resized_masks
         if len(masks.shape) == 2:
             masks = masks[:, :, None]
         return masks

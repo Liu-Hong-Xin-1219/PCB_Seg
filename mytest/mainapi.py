@@ -29,7 +29,8 @@ api=SEGAPI(
     label_path="",
 )
 # image = cv2.imread("/root/autodl-tmp/sahi/input/input/a1a1.jpeg")
-image = cv2.imread("/root/autodl-tmp/PCB_Seg/input/demopcb.png")
-image=cv2.resize(image,(1024,1024))
+# image = cv2.imread("/root/autodl-tmp/newpcbse/PCB_Seg/input/bigdemopcb.png")
+image = cv2.imread("/root/autodl-tmp/newpcbse/PCB_Seg/input/middemopcb.png")
+# image=cv2.resize(image,(1024,1024))
 res=api.infer(image)
 print("end of journey")
